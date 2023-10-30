@@ -1,0 +1,13 @@
+{% if news %}
+    {% for new in news %}
+
+        {% include 'news/parts/details.html' %}
+        <p>
+            {{ new.text }}
+        </p>
+
+    {% endfor %}
+
+{% else %}
+    <h2>Нет новостей</h2>
+{% endif %}

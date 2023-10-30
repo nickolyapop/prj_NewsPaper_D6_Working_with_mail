@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+{{ category  }} News
+{% endblock title %}
+
+{% block content %}
+
+{% if category.id %}
+<div class="subscribed">
+  <em>
+    Подписаться на категорию <strong> {{ category }}?</strong>
+   </em>
+  <a href="{% url 'news:subscribe' category.id %}" class="btn btn-outline-primary">
+    Подписаться
+  </a>
+ </div>
+{% else %}
+<div>
+    <em>
+        Отписаться от категории  <strong> {{ category }}? </strong>
+            </em>
+<a href = "{% url 'news:unsubscribe' category.id %}" class="btn btn-outline-primary" >
+    Отписаться!</a>
+</div>
+{% endif %}
+
+<!-- {% include 'news/parts/posts.html' %} -->
+
+{% endblock content %}

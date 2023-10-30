@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <h2>
+        Страница авторизованного пользователя {{ request.user.username }}
+    </h2>
+
+    <div>
+        Здесь может содержаться персональная информация для каждого пользователя
+        <div>
+
+            <a class="btn btn-primary" href="{% url 'sign:logout' %}">Выйти</a>
+
+            {% if is_not_author %}
+
+                <a class="btn btn-info" href="{% url 'protect:upgrade' %}">
+                    Стать автором
+                </a>
+            {% else %}
+                <h3>
+                    Вы являетесь автором
+                </h3>
+            {% endif %}
+            <a href="{% url 'news:news' %}" class="btn btn-primary my-3">На главную</a>
+{% endblock content %}

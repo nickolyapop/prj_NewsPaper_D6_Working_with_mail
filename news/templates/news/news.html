@@ -1,0 +1,78 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+    News
+{% endblock title %}
+
+{% block content %}
+
+    <h1>Все новости</h1>
+    {% if news %}
+
+        <h3>{{ time_now }}</h3>
+        <form method="GET">
+            {{ filter.form }}
+            <input class="btn btn-primary" type="submit" value="Найти">
+        </form>
+
+        <table class="table">
+            <tr>
+                <th scope="col">
+                    Автор
+                </th>
+                <th scope="col">
+                    Заголовок
+                </th>
+                <th scope="col">
+                    Дата
+                </th>
+                <th scope="col">
+                    Новость
+                </th>
+                <th scope="col">
+                    Категория
+                </th>
+
+
+            </tr>
+            {% for new in news %}
+                <tr>
+                    <td>
+                        <a href="{% url 'news:new_detail' new.id %}">
+                            {{ new.author|safe }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ new.title|safe }}
+                    </td>
+                    <td>
+                        {{ new.dateCreation|date:"d-M-Y H:i" }}
+                    </td>
+                    <td>
+                        {{ new.text|truncatechars:50 }}
+                    </td>
+                    <td>
+                        {% for c in new.category.all %}
+                            <a href="{% url 'news:category' c.id %}">{{ c }}</a>
+                            <br>
+                        {% endfor %}
+                    <td>
+                        <a href="{% url 'news:new_update' new.id %}">
+                            Редактировать
+                        </a>
+                        <a href="{% url 'news:new_delete' new.id %}">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'news:new_create' %}" class="btn btn-primary my-3">Добавить новость/статью</a>
+        {% include 'news/parts/paginator.html' %}
+    {% else %}
+        <!-- Если новостей нет, то сообщаем об этом пользователю  -->
+        <h2>Новостей нет</h2>
+    {% endif %}
+    <div><a href="{% url 'sign:login' %}" class="btn btn-primary my-3">Войти</a>
+        <a href="{% url 'sign:logout' %}" class="btn btn-danger my-3">Выйти</a></div>
+{% endblock content %}

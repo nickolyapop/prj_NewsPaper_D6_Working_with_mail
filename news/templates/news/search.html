@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+    News
+{% endblock title %}
+
+{% block content %}
+
+    <h1>Все новости</h1>
+
+    <form method="GET">
+        {{ filter.form }}
+        <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самим -->
+        <input class="btn btn-primary" type="submit" value="Найти">
+    </form>
+
+
+{% endblock content %}

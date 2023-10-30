@@ -1,0 +1,24 @@
+{% extends 'layout/base.html' %}
+{% block title %}
+    New delete
+{% endblock title %}
+
+{% block content %}
+
+    <h3>Удалить новость/статью?</h3>
+    <div class="card">
+        <div class="card-header">
+            <h4>{{ news.title }}</h4>
+            <div>
+                Автор: <span class="badge bg-info">{{ news.author }}</span> Тип:
+                <span class="badge bg-info">{{ news.get_categoryType_display }}</span>
+            </div>
+        </div>
+        <div class="card-body">{{ news.text }}</div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <input class="btn btn-danger my-3" type="submit" value="Удалить"/>
+    </form>
+
+{% endblock content %}

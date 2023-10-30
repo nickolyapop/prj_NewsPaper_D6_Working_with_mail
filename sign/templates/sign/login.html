@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+    <h2>
+        Войти в систему
+    </h2>
+
+    <form method="post" action="{% url 'sign:login' %}" class="py-3">
+
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'protect:index' %}" class="btn btn-primary my-3">Вход</a>
+    </form>
+
+    <a class="btn btn-secondary" href="/sign/signup/"> Регистрация </a>
+    <a class="btn btn-danger" href="{% url 'news:news' %}"> На главную </a>
+
+{% endblock content %}

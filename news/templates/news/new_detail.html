@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+{% block title %}
+    New
+{% endblock title %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ news.title }}</h3>
+            <div>
+                Автор: <span class="badge bg-info">{{ news.author }}</span>
+                Тип: <span class="badge bg-info">{{ news.get_categoryType_display }}</span>
+            </div>
+        </div>
+        <div class="card-body">{{ news.text }}</div>
+    </div>
+    <a href="{% url 'news:news' %}" class="btn btn-primary my-3">На главную</a>
+
+{% endblock content %}
